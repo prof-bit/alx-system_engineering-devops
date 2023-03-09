@@ -1,2 +1,2 @@
 #!/bin/bash
-chmod 407 hello
+chmod 777 hello
