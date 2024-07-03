@@ -1,7 +1,18 @@
 #!/usr/bin/env bash
-# Script that installs Nginx server
+# Update package list and install Nginx
+apt-get update -y
+apt-get install nginx -y
 
-apt-get -y update
-apt-get -y install nginx
-echo "Hello World!" > /var/www/html/index.nginx-debian.html
+# Create the custom HTML page
+echo 'Hello World!' > /var/www/html/index.html
+
+# Start Nginx
 service nginx start
+# Ensure Nginx is running and listening on port 80
+if ! nc -zv localhost 80; then
+  echo "Nginx is not running on port 80. Exiting."
+  exit 1
+fi
+
+# Print success message
+echo "Nginx installed and configured successfully. Visit http://localhost to see 'Hello World!'"
